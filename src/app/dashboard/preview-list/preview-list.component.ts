@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Video } from '../dashboard.types';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-preview-list',
@@ -6,8 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./preview-list.component.scss']
 })
 export class PreviewListComponent implements OnInit {
+  
+  @Output() videoSelected = new EventEmitter<Video>();
 
-  constructor() { }
+  videoList: Video[] = [];
+  selectedVideo: Video | undefined;
+
+  constructor(http: HttpClient) {
+    http
+    .get<Video[]>("https://api.angularbootcamp.com/videos")
+    .subscribe((videos) => (this.videoList = videos));
+   }
+
+selectVideo(video: Video) {
+  this.selectedVideo = video;
+  this.videoSelected.emit(video);
+}
 
   ngOnInit(): void {
   }

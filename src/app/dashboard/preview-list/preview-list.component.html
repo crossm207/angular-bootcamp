@@ -1,1 +1,10 @@
-<p>preview-list works!</p>
+<ul class="collection">
+  <li 
+  [class.active]="video.id === selectedVideo?.id"
+  (click)="selectVideo(video)" 
+  class="collection-item" 
+  *ngFor="let video of videoList"
+  >
+    <app-video [video]="video"></app-video>
+  </li>
+</ul>
