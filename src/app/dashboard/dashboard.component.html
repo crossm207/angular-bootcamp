@@ -1,14 +1,16 @@
 <div class="container">
   <div class="row">
-    <app-preview-list 
-    (videoSelected)="selectVideo($event)" 
-    class="col s3">
-    </app-preview-list>
 
-    <app-select-video 
-    [selectedVideo]="selectedVideo"
-    class="col s3">
-    </app-select-video>
+    <app-preview-list
+      [selectedVideo]="selectedVideo"
+      (videoSelected)="selectVideo($event)"
+      class="col s3"
+    ></app-preview-list>
+
+    <app-select-video
+      [selectedVideo]="selectedVideo"
+      class="col s3"
+    ></app-select-video>
 
     <app-filter class="col s3"></app-filter>
   </div>

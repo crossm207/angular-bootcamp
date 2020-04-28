@@ -1,9 +1,9 @@
 <ul class="collection">
-  <li 
-  [class.active]="video.id === selectedVideo?.id"
-  (click)="selectVideo(video)" 
-  class="collection-item" 
-  *ngFor="let video of videoList"
+  <li
+    *ngFor="let video of videoList | async"
+    [class.active]="video.id === selectedVideo?.id"
+    (click)="selectVideo(video)"
+    class="collection-item"
   >
     <app-video [video]="video"></app-video>
   </li>

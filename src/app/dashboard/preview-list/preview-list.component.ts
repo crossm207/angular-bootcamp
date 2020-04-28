@@ -1,31 +1,26 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Video } from '../dashboard.types';
-import { HttpClient } from '@angular/common/http';
+import { DashboardService } from '../dashboard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-preview-list',
   templateUrl: './preview-list.component.html',
-  styleUrls: ['./preview-list.component.scss']
+  styleUrls: ['./preview-list.component.scss'],
 })
 export class PreviewListComponent implements OnInit {
-  
+  @Input() selectedVideo: Video | undefined;
   @Output() videoSelected = new EventEmitter<Video>();
 
-  videoList: Video[] = [];
-  selectedVideo: Video | undefined;
+  videoList: Observable<Video[]>;
 
-  constructor(http: HttpClient) {
-    http
-    .get<Video[]>("https://api.angularbootcamp.com/videos")
-    .subscribe((videos) => (this.videoList = videos));
-   }
-
-selectVideo(video: Video) {
-  this.selectedVideo = video;
-  this.videoSelected.emit(video);
-}
-
-  ngOnInit(): void {
+  constructor(dashboardService: DashboardService) {
+    this.videoList = dashboardService.videos;
   }
 
+  selectVideo(video: Video) {
+    this.videoSelected.emit(video);
+  }
+
+  ngOnInit(): void {}
 }
