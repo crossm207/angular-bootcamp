@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Video } from '../dashboard.types';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+
+const URL_PREFIX = 'https://www.youtube.com/embed';
 
 @Component({
   selector: 'app-select-video',
@@ -8,9 +11,17 @@ import { Video } from '../dashboard.types';
 })
 export class SelectVideoComponent implements OnInit {
 
-  @Input() selectedVideo: Video | undefined;
+  @Input() set selectedVideo(video: Video | undefined) {
+    if (video) {
+    this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      URL_PREFIX + '/' + video.id
+    );
+  }
+    
+  }
 
-  constructor() { }
+    videoUrl: SafeUrl | undefined;
+    constructor(private domSanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
   }
