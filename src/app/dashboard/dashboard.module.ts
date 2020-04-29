@@ -6,6 +6,7 @@ import { SelectVideoComponent } from './select-video/select-video.component';
 import { FilterComponent } from './filter/filter.component';
 import { Routes, RouterModule } from '@angular/router';
 import { VideoComponent } from './video/video.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [{ path: '', component: DashboardComponent }];
 
@@ -18,7 +19,7 @@ const routes: Routes = [{ path: '', component: DashboardComponent }];
   VideoComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule, ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

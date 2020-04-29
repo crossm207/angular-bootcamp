@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  constructor() { }
+  searchTerm = new FormControl('');
+
+  constructor() {
+    this.searchTerm.valueChanges.subscribe(searchTermValue => console.log('search term', searchTermValue));
+   }
 
   ngOnInit(): void {
   }
