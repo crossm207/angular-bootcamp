@@ -2,13 +2,13 @@
   <div class="row">
 
     <app-preview-list
-      [selectedVideo]="selectedVideo"
+      [selectedVideo]="selectedVideo | async"
       (videoSelected)="selectVideo($event)"
       class="col s3"
     ></app-preview-list>
 
     <app-select-video
-      [selectedVideo]="selectedVideo"
+      [selectedVideo]="selectedVideo | async"
       class="col s3"
     ></app-select-video>
 
