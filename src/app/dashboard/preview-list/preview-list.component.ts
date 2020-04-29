@@ -13,9 +13,8 @@ export class PreviewListComponent implements OnInit {
   @Output() videoSelected = new EventEmitter<Video>();
 
   videoList: Observable<Video[]>;
-
   constructor(dashboardService: DashboardService) {
-    this.videoList = dashboardService.videos;
+    this.videoList = dashboardService.filterVideos;
   }
 
   selectVideo(video: Video) {

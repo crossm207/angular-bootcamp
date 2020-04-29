@@ -1,20 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl } from '@angular/forms';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
+  searchTerm = this.dashboardService.searchTerm;
+  constructor(private dashboardService: DashboardService) {}
 
-  searchTerm = new FormControl('');
-
-  constructor() {
-    this.searchTerm.valueChanges.subscribe(searchTermValue => console.log('search term', searchTermValue));
-   }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Video } from './dashboard.types'
+import { Router } from '@angular/router';
+import { DashboardService } from './dashboard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,15 +11,16 @@ import { Video } from './dashboard.types'
 })
 export class DashboardComponent implements OnInit {
 
-  selectedVideo: Video | undefined;
-
-  constructor() { }
+  selectedVideo: Observable<Video>;
+  constructor(private router: Router, dashboardService: DashboardService) {
+    this.selectedVideo = dashboardService.selectedVideo;
+  }
 
   ngOnInit(): void {
   }
 
 selectVideo(video: Video) {
-  this.selectedVideo = video;
+  this.router.navigate([], { queryParams: { selectedId: video.id } });
 }
 
 }
